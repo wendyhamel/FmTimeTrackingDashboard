@@ -4,6 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <!-- Tailwind play cdn ( for development and play purposes ) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        fontFamily: {
+          'sans': ['Rubik', 'sans-serif'],
+        },
+        fontSize: {
+          'sm': ['16px', '20px'],
+          'base': ['18px', '28px'],
+          'lg': ['22px', '30px'],
+          'xl': ['30px', '36px'],
+          '2xl': ['36px', '40px'],
+          '3xl': ['40px', '42px'],
+        },
+        colors: {
+          red: 'hsl(348, 100%, 68%)',
+          orange: 'hsl(15, 100%, 70%)',
+          yellow: 'hsl(43, 84%, 65%)',
+          green: 'hsl(145, 58%, 55%)',
+          'blue-50': 'hsl(195, 74%, 62%)',
+          'blue-100': 'hsl(236, 100%, 87%)',
+          'blue-200': 'hsl(235, 45%, 61%)',
+          'blue-300': 'hsl(246, 80%, 60%)',
+          'blue-400': 'hsl(235, 46%, 20%)',
+          'blue-500': 'hsl(226, 43%, 10%)',
+          violet: 'hsl(264, 64%, 52%)',
+          black: 'hsl(0, 0%, 0%)',
+          white: 'hsl(100,100%,100%)',
+        }
+      }
+    }
+  </script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <title>Frontend Mentor | Time tracking dashboard</title>
@@ -14,67 +57,208 @@
     .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
-<body>
+<body class="grid h-screen place-items-center bg-blue-500 text-white">
+  <main class="max-w-2xl mx-auto lg:max-w-none">
+    <section class="flex flex-col gap-6 my-10 px-6 lg:flex-row">
+      <div class="flex flex-col bg-blue-400 rounded-xl lg:flex-shrink-0 lg:w-56">
+        <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 lg:flex-col lg:items-start lg:gap-8 lg:pb-16">
+          <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="">
+          <h1>
+            <span class="block font-light text-blue-100">Report for</span>
+            <span class="text-lg font-light lg:text-2xl">Jeremy Robson</span>
+          </h1>
+        </div>
+        <nav class="flex-grow flex">
+          <ul class="flex-grow flex items-center justify-between py-6 px-8 lg:flex-col lg:items-start">
+            <li>
+              <a class="font-light text-blue-200 cursor-pointer hover:text-white ease-in-out duration-150">Daily</a>
+            </li>
+            <li>
+              <a class="font-light text-white cursor-pointer hover:text-white ease-in-out duration-150" active>Weekly</a>
+            </li>
+            <li>
+              <a class="font-light text-blue-200 cursor-pointer hover:text-white ease-in-out duration-150">Monthly</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-  Report for
-  Jeremy Robson
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-  Daily
-  Weekly
-  Monthly
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-orange w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
+            <img class="object-cover" src="images/icon-work.svg" alt="suitcase">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Work</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              5hrs &lt;!&ndash; daily &ndash;&gt;-->
+                32hrs <!-- weekly -->
+                <!--              103hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 7hrs &lt;!&ndash; daily &ndash;&gt;-->
+                Last week - 36hrs <!-- weekly -->
+                <!--              Last Month - 128hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Work
-  5hrs <!-- daily -->
-  Previous - 7hrs <!-- daily -->
-  32hrs <!-- weekly -->
-  Previous - 36hrs <!-- weekly -->
-  103hrs <!-- monthly -->
-  Previous - 128hrs <!-- monthly -->
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-blue-50 w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
+            <img class="object-cover" src="images/icon-play.svg" alt="controller">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Play</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
+                10hrs <!-- weekly -->
+                <!--              23hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 2hrs &lt;!&ndash; daily &ndash;&gt;-->
+                Last Week - 8hrs <!-- weekly -->
+                <!--              Last Month - 29hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Play
-  1hr <!-- daily -->
-  Previous - 2hrs <!-- daily -->
-  10hrs <!-- weekly -->
-  Previous - 8hrs <!-- weekly -->
-  23hrs <!-- monthly -->
-  Previous - 29hrs <!-- monthly -->
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-red w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
+            <img class="object-cover" src="images/icon-study.svg" alt="book">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Study</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              0hrs &lt;!&ndash; daily &ndash;&gt;-->
+                4hrs <!-- weekly -->
+  <!--              13hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
+                Last Week - 7hrs <!-- weekly -->
+  <!--              Last Month - 19hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Study
-  0hrs <!-- daily -->
-  Previous - 1hr <!-- daily -->
-  4hrs <!-- weekly -->
-  Previous - 7hrs <!-- weekly -->
-  13hrs <!-- monthly -->
-  Previous - 19hrs <!-- monthly -->
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-green w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
+            <img class="object-cover" src="images/icon-exercise.svg" alt="runner">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Exercise</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
+                4hrs <!-- weekly -->
+  <!--              11hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
+                Last Week - 5hrs <!-- weekly -->
+  <!--              Last Month - 18hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Exercise
-  1hr <!-- daily -->
-  Previous - 1hr <!-- daily -->
-  4hrs <!-- weekly -->
-  Previous - 5hrs <!-- weekly -->
-  11hrs <!-- monthly -->
-  Previous - 18hrs <!-- monthly -->
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-violet w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-16 h-16 pb-3 grid place-items-center">
+            <img class="object-cover" src="images/icon-social.svg" alt="speech bubble">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Social</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
+                5hrs <!-- weekly -->
+  <!--              21hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 3hrs &lt;!&ndash; daily &ndash;&gt;-->
+                Last Week - 10hrs <!-- weekly -->
+  <!--              Last Month - 23hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Social
-  1hr <!-- daily -->
-  Previous - 3hrs <!-- daily -->
-  5hrs <!-- weekly -->
-  Previous - 10hrs <!-- weekly -->
-  21hrs <!-- monthly -->
-  Previous - 23hrs <!-- monthly -->
+        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
+          <div class="absolute bg-yellow w-full h-32"></div>
+          <div class="absolute -top-2.5 right-4 w-16 h-16 pl-2 pb-2 grid place-items-center">
+            <img class="object-cover" src="images/icon-self-care.svg" alt="heart with hospital cross">
+          </div>
+          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+            <div class="flex items-center justify-between gap-4">
+              <span class="font-medium">Self Care</span>
+              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+              </button>
+            </div>
+            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+              <span class="text-xl font-light lg:text-3xl">
+  <!--              0hrs &lt;!&ndash; daily &ndash;&gt;-->
+                2hrs <!-- weekly -->
+  <!--              7hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+              <span class="text-blue-100 font-light">
+  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
+                Last Week - 2hrs <!-- weekly -->
+  <!--              Last Month - 11hrs &lt;!&ndash; monthly &ndash;&gt;-->
+              </span>
+            </div>
+          </div>
+          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+        </a>
 
-  Self Care
-  0hrs <!-- daily -->
-  Previous - 1hr <!-- daily -->
-  2hrs <!-- weekly -->
-  Previous - 2hrs <!-- weekly -->
-  7hrs <!-- monthly -->
-  Previous - 11hrs <!-- monthly -->
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+      </div>
+    </section>
+  </main>
+  <footer class="text-blue-100 text-center font-light text-sm px-6 pb-6">
+    Challenge by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io/profile/wendyhamel" target="_blank">Wendy Hamel</a>.
+  </footer>
 </body>
 </html>
