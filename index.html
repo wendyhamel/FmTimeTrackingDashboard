@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="timeframesport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
 
   <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +18,7 @@
           'sans': ['Rubik', 'sans-serif'],
         },
         fontSize: {
-          'sm': ['16px', '20px'],
+          'sm': ['14px', '18px'],
           'base': ['18px', '28px'],
           'lg': ['22px', '30px'],
           'xl': ['30px', '36px'],
@@ -51,18 +51,16 @@
   
   <title>Frontend Mentor | Time tracking dashboard</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body class="grid h-screen place-items-center bg-blue-500 text-white">
   <main class="max-w-2xl mx-auto lg:max-w-none">
-    <section class="flex flex-col gap-6 my-10 px-6 lg:flex-row">
+    <section
+            x-data="{timeframes: 'weekly'}"
+            class="flex flex-col gap-6 my-10 px-6 lg:flex-row"
+    >
       <div class="flex flex-col bg-blue-400 rounded-xl lg:flex-shrink-0 lg:w-56">
         <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 lg:flex-col lg:items-start lg:gap-8 lg:pb-16">
-          <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="">
+          <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="user avatar">
           <h1>
             <span class="block font-light text-blue-100">Report for</span>
             <span class="text-lg font-light lg:text-2xl">Jeremy Robson</span>
@@ -70,15 +68,30 @@
         </div>
         <nav class="flex-grow flex">
           <ul class="flex-grow flex items-center justify-between py-6 px-8 lg:flex-col lg:items-start">
-            <li>
-              <a class="font-light text-blue-200 cursor-pointer hover:text-white ease-in-out duration-150">Daily</a>
-            </li>
-            <li>
-              <a class="font-light text-white cursor-pointer hover:text-white ease-in-out duration-150" active>Weekly</a>
-            </li>
-            <li>
-              <a class="font-light text-blue-200 cursor-pointer hover:text-white ease-in-out duration-150">Monthly</a>
-            </li>
+                <li>
+                  <button
+                      type="button"
+                      x-on:click="timeframes = 'daily'"
+                      class="font-light hover:text-white ease-in-out duration-150"
+                      :class="timeframes === 'daily' ? 'text-white': ' text-blue-200'"
+                  >Daily</button>
+                </li>
+                <li>
+                  <button
+                      type="button"
+                      x-on:click="timeframes = 'weekly'"
+                      class="font-light text-white hover:text-white ease-in-out duration-150"
+                      :class="timeframes === 'weekly' ? 'text-white': ' text-blue-200'"
+                  >Weekly</button>
+                </li>
+              <li>
+                  <button
+                      type="button"
+                      x-on:click="timeframes = 'monthly'"
+                      class="font-light text-white hover:text-white ease-in-out duration-150"
+                      :class="timeframes === 'monthly' ? 'text-white': ' text-blue-200'"
+                  >Monthly</button>
+              </li>
           </ul>
         </nav>
       </div>
@@ -93,21 +106,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Work</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              5hrs &lt;!&ndash; daily &ndash;&gt;-->
-                32hrs <!-- weekly -->
-                <!--              103hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 7hrs &lt;!&ndash; daily &ndash;&gt;-->
-                Last week - 36hrs <!-- weekly -->
-                <!--              Last Month - 128hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">5hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 7hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">32hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 36hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">103hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 128hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
@@ -121,21 +136,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Play</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
-                10hrs <!-- weekly -->
-                <!--              23hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 2hrs &lt;!&ndash; daily &ndash;&gt;-->
-                Last Week - 8hrs <!-- weekly -->
-                <!--              Last Month - 29hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 2hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">10hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 8hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">23hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 29hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
@@ -149,21 +166,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Study</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              0hrs &lt;!&ndash; daily &ndash;&gt;-->
-                4hrs <!-- weekly -->
-  <!--              13hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
-                Last Week - 7hrs <!-- weekly -->
-  <!--              Last Month - 19hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">0hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">4hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 7hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">13hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 19hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
@@ -177,21 +196,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Exercise</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
-                4hrs <!-- weekly -->
-  <!--              11hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
-                Last Week - 5hrs <!-- weekly -->
-  <!--              Last Month - 18hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">4hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 5hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">11hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 18hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
@@ -205,21 +226,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Social</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              1hr &lt;!&ndash; daily &ndash;&gt;-->
-                5hrs <!-- weekly -->
-  <!--              21hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 3hrs &lt;!&ndash; daily &ndash;&gt;-->
-                Last Week - 10hrs <!-- weekly -->
-  <!--              Last Month - 23hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 3hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">5hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 10hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">21hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 23hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
@@ -233,21 +256,23 @@
           <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
             <div class="flex items-center justify-between gap-4">
               <span class="font-medium">Self Care</span>
-              <button class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                 <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
               </button>
             </div>
             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-              <span class="text-xl font-light lg:text-3xl">
-  <!--              0hrs &lt;!&ndash; daily &ndash;&gt;-->
-                2hrs <!-- weekly -->
-  <!--              7hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
-              <span class="text-blue-100 font-light">
-  <!--              Previous - 1hr &lt;!&ndash; daily &ndash;&gt;-->
-                Last Week - 2hrs <!-- weekly -->
-  <!--              Last Month - 11hrs &lt;!&ndash; monthly &ndash;&gt;-->
-              </span>
+                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">0hrs</span>
+                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
+                </div>
+                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">2hrs</span>
+                    <span class="text-blue-100 font-light">Last week - 2hrs</span>
+                </div>
+                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                    <span class="text-xl font-light lg:text-3xl">7hrs</span>
+                    <span class="text-blue-100 font-light">Last Month - 11hrs</span>
+                </div>
             </div>
           </div>
           <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
