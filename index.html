@@ -22,11 +22,10 @@
   <title>Frontend Mentor | Time tracking dashboard</title>
 
 </head>
-<body class="grid h-screen place-items-center bg-blue-500 text-white">
-  <main class="mx-auto">
-    <section
+<body class="grid h-dvh place-items-center bg-blue-500 text-white xl:place-content-center">
+  <main
         x-data="showContent()"
-        class="flex flex-col gap-6 my-10 px-6 xl:flex-row"
+        class="w-full max-w-2xl flex flex-col gap-6 my-10 px-6 md:max-w-4xl xl:max-w-none xl:flex-row"
     >
       <section class="flex flex-col bg-blue-400 rounded-xl xl:shrink-0 xl:w-56">
         <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 xl:flex-col xl:items-start xl:gap-8 xl:pb-16">
@@ -90,7 +89,6 @@
               </article>
           </template>
       </section>
-    </section>
   </main>
   <footer class="fixed bottom-0 inset-x-0 text-center text-xs text-blue-100 font-light bg-white/10 p-3 opacity-0 translate-y-2 hover:opacity-100 hover:translate-y-0 transform transition ease-in-out duration-150">
     Challenge by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io/challenges/time-tracking-dashboard-UIQ7167Jw" target="_blank">Frontend Mentor</a>.

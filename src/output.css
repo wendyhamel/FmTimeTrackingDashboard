@@ -653,6 +653,10 @@ video {
   height: 2rem;
 }
 
+.h-dvh {
+  height: 100dvh;
+}
+
 .w-16 {
   width: 4rem;
 }
@@ -700,6 +704,10 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.place-content-center {
+  place-content: center;
 }
 
 .place-items-center {
@@ -1067,12 +1075,21 @@ video {
 }
 
 @media (min-width: 1280px) {
+  .xl\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .xl\:w-64 {
     width: 16rem;
   }
 
   .xl\:w-56 {
     width: 14rem;
+  }
+
+  .xl\:max-w-none {
+    max-width: none;
   }
 
   .xl\:flex-shrink-0 {
@@ -1093,6 +1110,10 @@ video {
 
   .xl\:flex-col {
     flex-direction: column;
+  }
+
+  .xl\:place-content-center {
+    place-content: center;
   }
 
   .xl\:items-start {
