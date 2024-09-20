@@ -9,56 +9,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- Tailwind play cdn ( for development and play purposes ) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        fontFamily: {
-          'sans': ['Rubik', 'sans-serif'],
-        },
-        fontSize: {
-          'sm': ['14px', '18px'],
-          'base': ['18px', '28px'],
-          'lg': ['22px', '30px'],
-          'xl': ['30px', '36px'],
-          '2xl': ['36px', '40px'],
-          '3xl': ['40px', '42px'],
-        },
-        colors: {
-          red: 'hsl(348, 100%, 68%)',
-          orange: 'hsl(15, 100%, 70%)',
-          yellow: 'hsl(43, 84%, 65%)',
-          green: 'hsl(145, 58%, 55%)',
-          'blue-50': 'hsl(195, 74%, 62%)',
-          'blue-100': 'hsl(236, 100%, 87%)',
-          'blue-200': 'hsl(235, 45%, 61%)',
-          'blue-300': 'hsl(246, 80%, 60%)',
-          'blue-400': 'hsl(235, 46%, 20%)',
-          'blue-500': 'hsl(226, 43%, 10%)',
-          violet: 'hsl(264, 64%, 52%)',
-          black: 'hsl(0, 0%, 0%)',
-          white: 'hsl(100,100%,100%)',
-        }
-      }
-    }
-  </script>
+  <script defer src="./src/timeTracking.js"></script>
 
   <!-- Alpine.js -->
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
+
+  <link rel="stylesheet" href="./src/output.css">
+
   <title>Frontend Mentor | Time tracking dashboard</title>
 
 </head>
 <body class="grid h-screen place-items-center bg-blue-500 text-white">
   <main class="max-w-2xl mx-auto lg:max-w-none">
     <section
-            x-data="{timeframes: 'weekly'}"
-            class="flex flex-col gap-6 my-10 px-6 lg:flex-row"
+        x-data="showContent()"
+        class="flex flex-col gap-6 my-10 px-6 lg:flex-row"
     >
-      <div class="flex flex-col bg-blue-400 rounded-xl lg:flex-shrink-0 lg:w-56">
+      <section class="flex flex-col bg-blue-400 rounded-xl lg:flex-shrink-0 lg:w-56">
         <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 lg:flex-col lg:items-start lg:gap-8 lg:pb-16">
           <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="user avatar">
           <h1>
@@ -66,223 +36,64 @@
             <span class="text-lg font-light lg:text-2xl">Jeremy Robson</span>
           </h1>
         </div>
-        <nav class="flex-grow flex">
-          <ul class="flex-grow flex items-center justify-between py-6 px-8 lg:flex-col lg:items-start">
-                <li>
-                  <button
-                      type="button"
-                      x-on:click="timeframes = 'daily'"
-                      class="font-light hover:text-white ease-in-out duration-150"
-                      :class="timeframes === 'daily' ? 'text-white': ' text-blue-200'"
-                  >Daily</button>
-                </li>
-                <li>
-                  <button
-                      type="button"
-                      x-on:click="timeframes = 'weekly'"
-                      class="font-light text-white hover:text-white ease-in-out duration-150"
-                      :class="timeframes === 'weekly' ? 'text-white': ' text-blue-200'"
-                  >Weekly</button>
-                </li>
-              <li>
-                  <button
-                      type="button"
-                      x-on:click="timeframes = 'monthly'"
-                      class="font-light text-white hover:text-white ease-in-out duration-150"
-                      :class="timeframes === 'monthly' ? 'text-white': ' text-blue-200'"
-                  >Monthly</button>
-              </li>
-          </ul>
-        </nav>
-      </div>
+        <fieldset class="flex-grow flex items-center justify-between py-6 px-8 lg:flex-col lg:items-start">
+            <legend class="sr-only">Select a timeframe</legend>
+            <template x-for="timeframe in timeframes">
+                <label
+                        class="font-light hover:cursor-pointer hover:text-white ease-in-out duration-150"
+                        :class="activeTimeframe === timeframe ? 'text-white' :'text-blue-200'"
+                >
+                    <input
+                        type="radio"
+                        name="timeframeOptions"
+                        :value="timeframe"
+                        @input="activeTimeframe = timeframe"
+                        :aria-labelledby="timeframe"
+                        class="sr-only"
+                    >
+                    <span class="capitalize" x-text="timeframe"></span>
+                </label>
+            </template>
+        </fieldset>
+      </section>
 
-      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-orange w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
-            <img class="object-cover" src="images/icon-work.svg" alt="suitcase">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Work</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">5hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 7hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">32hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 36hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">103hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 128hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-blue-50 w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
-            <img class="object-cover" src="images/icon-play.svg" alt="controller">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Play</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 2hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">10hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 8hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">23hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 29hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-red w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
-            <img class="object-cover" src="images/icon-study.svg" alt="book">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Study</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">0hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">4hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 7hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">13hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 19hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-green w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-20 h-20 pl-2 pb-3 grid place-items-center">
-            <img class="object-cover" src="images/icon-exercise.svg" alt="runner">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Exercise</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">4hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 5hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">11hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 18hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-violet w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-16 h-16 pb-3 grid place-items-center">
-            <img class="object-cover" src="images/icon-social.svg" alt="speech bubble">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Social</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-             <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">1hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 3hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">5hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 10hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">21hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 23hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-        <a href="#" class="relative flex-grow flex flex-col rounded-xl overflow-hidden group lg:w-64">
-          <div class="absolute bg-yellow w-full h-32"></div>
-          <div class="absolute -top-2.5 right-4 w-16 h-16 pl-2 pb-2 grid place-items-center">
-            <img class="object-cover" src="images/icon-self-care.svg" alt="heart with hospital cross">
-          </div>
-          <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
-            <div class="flex items-center justify-between gap-4">
-              <span class="font-medium">Self Care</span>
-              <button type="button" class="p-0.5 rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
-                <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
-              </button>
-            </div>
-            <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                <div x-show="timeframes === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">0hrs</span>
-                    <span class="text-blue-100 font-light">Previous - 1hrs</span>
-                </div>
-                <div x-show="timeframes === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">2hrs</span>
-                    <span class="text-blue-100 font-light">Last week - 2hrs</span>
-                </div>
-                <div x-show="timeframes === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                    <span class="text-xl font-light lg:text-3xl">7hrs</span>
-                    <span class="text-blue-100 font-light">Last Month - 11hrs</span>
-                </div>
-            </div>
-          </div>
-          <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
-        </a>
-
-      </div>
+      <section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <template x-for="card in cards">
+              <article class="relative flex-grow flex flex-col rounded-xl overflow-hidden hover:cursor-pointer group lg:w-64">
+                  <div class="absolute w-full h-32" :class="card.backgroundColorClass"></div>
+                  <div class="absolute -top-2.5 right-4 grid place-items-center" :class="card.illustrationClasses">
+                      <img class="object-cover" :src="card.imagePath" :alt="card.altText">
+                  </div>
+                  <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+                      <div class="flex items-center justify-between gap-4">
+                          <span class="font-medium" x-text="card.title"></span>
+                          <button type="button" class="w-8 h-8 p-0.5 grid place-items-center rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
+                              <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
+                          </button>
+                      </div>
+                      <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                          <div x-show="activeTimeframe === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.daily.current"></span>hrs</span>
+                              <span class="text-blue-100 font-light" >Previous - <span x-text="card.timeframes.daily.previous"></span>hrs</span>
+                          </div>
+                          <div x-show="activeTimeframe === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.weekly.current"></span>hrs</span>
+                              <span class="text-blue-100 font-light">Last week - <span x-text="card.timeframes.weekly.previous"></span>hrs</span>
+                          </div>
+                          <div x-show="activeTimeframe === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.monthly.current"></span>hrs</span>
+                              <span class="text-blue-100 font-light">Last Month - <span x-text="card.timeframes.monthly.previous"></span>hrs</span>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="absolute inset-0 pointer-events-none group-hover:bg-blue-200/10 ease-in-out duration-300"></div>
+              </article>
+          </template>
+      </section>
     </section>
   </main>
-  <footer class="text-blue-100 text-center font-light text-sm px-6 pb-6">
-    Challenge by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+  <footer class="fixed bottom-0 inset-x-0 text-center text-xs text-blue-100 font-light bg-white/10 p-3 opacity-0 translate-y-2 hover:opacity-100 hover:translate-y-0 transform transition ease-in-out duration-150">
+    Challenge by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io/challenges/time-tracking-dashboard-UIQ7167Jw" target="_blank">Frontend Mentor</a>.
     Coded by <a class="font-normal text-white hover:underline" href="https://www.frontendmentor.io/profile/wendyhamel" target="_blank">Wendy Hamel</a>.
   </footer>
 </body>
