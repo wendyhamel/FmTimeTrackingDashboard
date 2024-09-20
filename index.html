@@ -22,7 +22,7 @@
   <title>Frontend Mentor | Time tracking dashboard</title>
 
 </head>
-<body class="grid h-dvh place-content-center bg-blue-500 text-white">
+<body class="grid h-dvh place-items-center bg-blue-500 text-white">
   <main
         x-data="showContent()"
         class="w-full max-w-2xl flex flex-col gap-6 my-10 px-6 md:max-w-4xl xl:max-w-none xl:flex-row"
@@ -56,7 +56,7 @@
         </fieldset>
       </section>
 
-      <section class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <section class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
           <template x-for="card in cards">
               <article class="relative flex-grow flex flex-col rounded-xl overflow-hidden hover:cursor-pointer group lg:w-64">
                   <div class="absolute w-full h-32" :class="card.backgroundColorClass"></div>
