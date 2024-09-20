@@ -56,21 +56,21 @@
         </fieldset>
       </section>
 
-      <section class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
+      <section class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           <template x-for="card in cards">
               <article class="relative flex-grow flex flex-col rounded-xl overflow-hidden hover:cursor-pointer group xl:w-64">
                   <div class="absolute w-full h-32" :class="card.backgroundColorClass"></div>
                   <div class="absolute -top-2.5 right-4 grid place-items-center" :class="card.illustrationClasses">
                       <img class="object-cover" :src="card.imagePath" :alt="card.altText">
                   </div>
-                  <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow lg:mt-10 lg:gap-6">
+                  <div class="relative flex flex-col gap-2 bg-blue-400 rounded-t-xl mt-8 p-6 flex-grow md:mt-10 md:gap-6">
                       <div class="flex items-center justify-between gap-4">
                           <span class="font-medium" x-text="card.title"></span>
                           <button type="button" class="w-8 h-8 p-0.5 grid place-items-center rounded-full text-blue-100 hover:text-white ease-in-out duration-150" title="options">
                               <svg width="21" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Zm8 0a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" fill="currentColor" fill-rule="evenodd"/></svg>
                           </button>
                       </div>
-                      <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
+                      <div class="flex items-center justify-between gap-4 md:gap-3 lg:flex-col lg:items-start">
                           <div x-show="activeTimeframe === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
                               <span class="text-xl font-light md:text-3xl"><span x-text="card.timeframes.daily.current"></span>hrs</span>
                               <span class="text-blue-100 font-light" >Previous - <span x-text="card.timeframes.daily.previous"></span>hrs</span>
