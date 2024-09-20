@@ -1016,6 +1016,16 @@ video {
   .md\:place-content-center {
     place-content: center;
   }
+
+  .md\:text-3xl {
+    font-size: 40px;
+    line-height: 42px;
+  }
+
+  .md\:text-2xl {
+    font-size: 36px;
+    line-height: 40px;
+  }
 }
 
 @media (min-width: 1024px) {

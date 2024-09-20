@@ -32,7 +32,7 @@
           <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="user avatar">
           <h1>
             <span class="block font-light text-blue-100">Report for</span>
-            <span class="text-lg font-light lg:text-2xl">Jeremy Robson</span>
+            <span class="text-lg font-light md:text-2xl">Jeremy Robson</span>
           </h1>
         </div>
         <fieldset class="flex-grow flex items-center justify-between py-6 px-8 xl:flex-col xl:items-start">
@@ -58,7 +58,7 @@
 
       <section class="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
           <template x-for="card in cards">
-              <article class="relative flex-grow flex flex-col rounded-xl overflow-hidden hover:cursor-pointer group lg:w-64">
+              <article class="relative flex-grow flex flex-col rounded-xl overflow-hidden hover:cursor-pointer group xl:w-64">
                   <div class="absolute w-full h-32" :class="card.backgroundColorClass"></div>
                   <div class="absolute -top-2.5 right-4 grid place-items-center" :class="card.illustrationClasses">
                       <img class="object-cover" :src="card.imagePath" :alt="card.altText">
@@ -72,15 +72,15 @@
                       </div>
                       <div class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
                           <div x-show="activeTimeframe === 'daily'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.daily.current"></span>hrs</span>
+                              <span class="text-xl font-light md:text-3xl"><span x-text="card.timeframes.daily.current"></span>hrs</span>
                               <span class="text-blue-100 font-light" >Previous - <span x-text="card.timeframes.daily.previous"></span>hrs</span>
                           </div>
                           <div x-show="activeTimeframe === 'weekly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.weekly.current"></span>hrs</span>
+                              <span class="text-xl font-light md:text-3xl"><span x-text="card.timeframes.weekly.current"></span>hrs</span>
                               <span class="text-blue-100 font-light">Last week - <span x-text="card.timeframes.weekly.previous"></span>hrs</span>
                           </div>
                           <div x-show="activeTimeframe === 'monthly'" style="display: none" class="flex items-center justify-between gap-4 lg:flex-col lg:items-start lg:gap-3">
-                              <span class="text-xl font-light lg:text-3xl"><span x-text="card.timeframes.monthly.current"></span>hrs</span>
+                              <span class="text-xl font-light md:text-3xl"><span x-text="card.timeframes.monthly.current"></span>hrs</span>
                               <span class="text-blue-100 font-light">Last Month - <span x-text="card.timeframes.monthly.previous"></span>hrs</span>
                           </div>
                       </div>
