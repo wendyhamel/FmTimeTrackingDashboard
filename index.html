@@ -23,20 +23,20 @@
 
 </head>
 <body class="grid h-screen place-items-center bg-blue-500 text-white">
-  <main class="max-w-2xl mx-auto lg:max-w-none">
+  <main class="mx-auto">
     <section
         x-data="showContent()"
-        class="flex flex-col gap-6 my-10 px-6 lg:flex-row"
+        class="flex flex-col gap-6 my-10 px-6 xl:flex-row"
     >
-      <section class="flex flex-col bg-blue-400 rounded-xl lg:flex-shrink-0 lg:w-56">
-        <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 lg:flex-col lg:items-start lg:gap-8 lg:pb-16">
+      <section class="flex flex-col bg-blue-400 rounded-xl xl:shrink-0 xl:w-56">
+        <div class="bg-blue-300 rounded-xl flex items-center gap-4 py-8 px-6 xl:flex-col xl:items-start xl:gap-8 xl:pb-16">
           <img class="border-4 border-white rounded-full w-20 h-20" src="images/image-jeremy.png" alt="user avatar">
           <h1>
             <span class="block font-light text-blue-100">Report for</span>
             <span class="text-lg font-light lg:text-2xl">Jeremy Robson</span>
           </h1>
         </div>
-        <fieldset class="flex-grow flex items-center justify-between py-6 px-8 lg:flex-col lg:items-start">
+        <fieldset class="flex-grow flex items-center justify-between py-6 px-8 xl:flex-col xl:items-start">
             <legend class="sr-only">Select a timeframe</legend>
             <template x-for="timeframe in timeframes">
                 <label
